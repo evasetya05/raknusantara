@@ -1,11 +1,12 @@
+import pymysql
+pymysql.install_as_MySQLdb()
+
 from .base import *
 
 DEBUG = False
 ALLOWED_HOSTS = ['raknusantara.teknusa.com', 'www.raknusantara.teknusa.com']
 
 
-import pymysql
-pymysql.install_as_MySQLdb()
 
 
 DATABASES = {

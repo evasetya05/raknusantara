@@ -3,3 +3,9 @@
 /.env
 /env
 env
+
+# Ignore SQLite database
+db.sqlite3
+
+# Ignore SQLite journal (kalau ada)
+*.sqlite3-journal
