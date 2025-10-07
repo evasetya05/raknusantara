@@ -7,9 +7,9 @@ ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'raknusantara',
-        'USER': 'dbuser',
-        'PASSWORD': 'dbpassword',
+        'NAME': 'teknusas_raknusantara',
+        'USER': 'teknusas_raknusantara',
+        'PASSWORD': '@Pontianak123',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
