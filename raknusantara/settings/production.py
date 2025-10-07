@@ -1,9 +1,13 @@
 from .base import *
 
 DEBUG = False
-ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com']
+ALLOWED_HOSTS = ['raknusantara.teknusa.com', 'www.raknusantara.teknusa.com']
 
-# Contoh: konfigurasi MySQL
+
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
