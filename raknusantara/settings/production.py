@@ -3,7 +3,7 @@ pymysql.install_as_MySQLdb()
 
 from .base import *
 
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['raknusantara.teknusa.com', 'www.raknusantara.teknusa.com']
 
 
