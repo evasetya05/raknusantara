@@ -15,4 +15,14 @@ class Migration(migrations.Migration):
             name="price",
             field=models.FloatField(blank=True, null=True),
         ),
+        migrations.AddField(
+            model_name="item",
+            name="image_secondary",
+            field=models.ImageField(blank=True, null=True, upload_to="item_images"),
+        ),
+        migrations.AddField(
+            model_name="item",
+            name="image_tertiary",
+            field=models.ImageField(blank=True, null=True, upload_to="item_images"),
+        ),
     ]

@@ -6,8 +6,26 @@
 
 {% block content %}
     <div class="grid grid-cols-5 gap-6">
-        <div class="col-span-3">
-            <img src="{{ item.image.url }}" class="rounded-xl">
+        <div class="col-span-3 space-y-4">
+            {% with images=item.get_images %}
+                {% if images %}
+                    <img src="{{ images.0.url }}" alt="{{ item.name }}" class="w-full rounded-2xl object-cover">
+
+                    {% if images|length > 1 %}
+                        <div class="grid grid-cols-3 gap-3">
+                            {% for image in images %}
+                                {% if not forloop.first %}
+                                    <img src="{{ image.url }}" alt="{{ item.name }}" class="h-32 w-full rounded-xl object-cover">
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="flex h-64 w-full items-center justify-center rounded-2xl border-2 border-dashed border-gray-300 bg-white text-gray-400">
+                        Belum ada gambar untuk koleksi ini
+                    </div>
+                {% endif %}
+            {% endwith %}
         </div>
         <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
             <h1 class="mb-6 text-2xl">{{ item.name }}</h1>
@@ -41,8 +59,14 @@
             {% for item in related_items %}
                 <div>
                     <a href="{% url 'item:detail' item.id %}">
-                        <div>
-                            <img src="{{ item.image.url }}" class="rounded-t-xl">
+                        <div class="relative h-44 w-full overflow-hidden rounded-t-xl bg-amber-50">
+                            {% with image=item.primary_image %}
+                                {% if image %}
+                                    <img src="{{ image.url }}" alt="{{ item.name }}" class="h-full w-full object-cover">
+                                {% else %}
+                                    <div class="flex h-full w-full items-center justify-center text-sm text-amber-600">Tidak ada gambar</div>
+                                {% endif %}
+                            {% endwith %}
                         </div>
                         <div class="p-6 bg-white rounded-b-xl">
                             <h2 class="text-2xl">{{ item.name }}</h2>
