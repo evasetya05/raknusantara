@@ -1,8 +1,8 @@
 /venv
 /.idea
-/.env
-/env
-env
+/.envl
+/envl
+envl
 
 # Ignore SQLite database
 db.sqlite3
