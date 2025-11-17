@@ -66,3 +66,37 @@ class Item(models.Model):
     def primary_image(self):
         images = self.get_images()
         return images[0] if images else None
+
+
+class Comment(models.Model):
+    item = models.ForeignKey(Item, related_name='comments', on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, related_name='item_comments', on_delete=models.CASCADE)
+    content = models.TextField()
+    parent = models.ForeignKey('self', related_name='replies', on_delete=models.CASCADE, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('created_at',)
+
+    def __str__(self):
+        return f"Komentar oleh {self.created_by} pada {self.item}"
+
+    def is_root(self):
+        return self.parent_id is None
+
+
+class DiscussionSchedule(models.Model):
+    item = models.ForeignKey(Item, related_name='discussion_schedules', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    agenda = models.TextField(blank=True)
+    scheduled_at = models.DateTimeField()
+    location_name = models.CharField(max_length=255, blank=True)
+    location_url = models.URLField(blank=True)
+    created_by = models.ForeignKey(User, related_name='discussion_schedules', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('scheduled_at',)
+
+    def __str__(self):
+        return f"Diskusi {self.title} - {self.item.name}"

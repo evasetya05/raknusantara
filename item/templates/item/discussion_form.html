@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto w-full max-w-3xl space-y-8 rounded-3xl border border-emerald-200 bg-white p-8 shadow-sm">
+    <div class="space-y-2 text-center">
+        <h1 class="text-3xl font-semibold text-emerald-900">{{ title }}</h1>
+        <p class="text-sm text-emerald-700">Jadwalkan obrolan santai untuk buku <strong>{{ item.name }}</strong> bersama teman dan komunitas Anda.</p>
+    </div>
+
+    <form method="post" action="." class="space-y-5">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="space-y-2">
+            {{ form.title.label_tag }}
+            {{ form.title }}
+            {{ form.title.errors }}
+        </div>
+
+        <div class="space-y-2">
+            {{ form.agenda.label_tag }}
+            {{ form.agenda }}
+            <p class="text-xs text-emerald-700">Opsional: tulis garis besar topik atau bahan yang perlu disiapkan.</p>
+            {{ form.agenda.errors }}
+        </div>
+
+        <div class="space-y-2">
+            {{ form.scheduled_at.label_tag }}
+            {{ form.scheduled_at }}
+            <p class="text-xs text-emerald-700">Gunakan penjadwalan 24 jam. Peserta akan melihat jadwal dalam zona waktu WIB.</p>
+            {{ form.scheduled_at.errors }}
+        </div>
+
+        <div class="flex items-center justify-between">
+            <a href="{% url 'item:detail' item.id %}#diskusi" class="text-sm font-semibold text-emerald-600 hover:underline">Batalkan</a>
+            <button type="submit" class="rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-600">Simpan Jadwal</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
