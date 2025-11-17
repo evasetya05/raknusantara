@@ -1,41 +1,71 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-    Dashboard
+    Dasbor
 {% endblock %}
-
 {% block content %}
-    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
-        <h2 class="mb-12 text-2xl text-center">My Items</h2>
-        <div class="grid grid-cols-3 gap-3">
-            {% for item in items %}
-                <div>
-                    <a href="{% url 'item:detail' item.id %}">
-                        <div>
-                            <img src="{{ item.image.url }}" class="rounded-t-xl">
-                        </div>
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h2 class="text-2xl">{{ item.name }}</h2>
-                            <p class="text-gray-500">Price: {{ item.price }}</p>
-                        </div>
-                    </a>
+    <div class="bg-amber-50">
+        <div class="mx-auto max-w-6xl space-y-10 px-4 py-10 sm:px-6 lg:px-8">
+            <section class="rounded-3xl border border-amber-200 bg-white p-8 shadow-sm">
+                <div class="flex flex-col gap-6 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+                    <div class="space-y-4">
+                        <span class="text-sm font-semibold uppercase tracking-wide text-amber-600">Rak Nusantara</span>
+                        <h1 class="text-3xl font-bold text-amber-900 sm:text-4xl">Selamat datang di perpustakaan rumah Anda</h1>
+                        <p class="text-base text-amber-700">Kelola, susun, dan temukan kembali koleksi bacaan pribadi Anda dengan tampilan yang rapi seperti perpustakaan keluarga.</p>
+                    </div>
+                    <div class="hidden max-w-xs rounded-2xl border border-amber-200 bg-amber-50 p-5 text-left sm:block">
+                        <h2 class="text-sm font-semibold text-amber-800">Tips rak</h2>
+                        <p class="mt-2 text-sm text-amber-700">Gunakan kategori untuk menyusun rak sesuai genre, tema, atau ruangan di rumah Anda.</p>
+                    </div>
                 </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
-        <h2 class="mb-12 text-2xl text-center">Categories</h2>
-        <div class="grid grid-cols-3 gap-3">
-            {% for category in categories %}
-                <div>
-                    <a href="#">
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h2 class="textx-2xl">{{ category.name }}</h2>
-                            <p class="text-gray-500">{{ category.items.count }} items</p>
-                        </div>
-                    </a>
+            </section>
+
+            <section class="rounded-3xl border border-amber-200 bg-white shadow-sm">
+                <div class="border-b border-amber-200 px-6 py-6 text-center sm:text-left">
+                    <h2 class="text-2xl font-semibold text-amber-900">Koleksi Saya</h2>
+                    <p class="mt-2 text-sm text-amber-700">Telusuri buku, majalah, atau arsip favorit yang telah Anda simpan.</p>
                 </div>
-            {% endfor %}
+                <div class="grid grid-cols-1 gap-6 px-6 py-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {% for item in items %}
+                        <article class="h-full">
+                            <a href="{% url 'item:detail' item.id %}" class="group flex h-full flex-col gap-4 overflow-hidden rounded-2xl border border-amber-100 bg-amber-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg sm:flex-row sm:items-center">
+                                <div class="relative mx-auto h-28 w-28 overflow-hidden rounded-xl bg-amber-100 sm:mx-0 sm:h-32 sm:w-32">
+                                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="h-full w-full object-cover">
+                                </div>
+                                <div class="flex flex-1 flex-col justify-between text-center sm:text-left">
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-amber-900 transition group-hover:text-amber-700">{{ item.name }}</h3>
+                                        <p class="mt-2 text-sm text-amber-700">Harga: {{ item.price }}</p>
+                                    </div>
+                                    <span class="mt-4 inline-flex items-center justify-center text-sm font-semibold text-amber-600 transition group-hover:text-amber-800 sm:justify-start">Lihat detail</span>
+                                </div>
+                            </a>
+                        </article>
+                    {% empty %}
+                        <p class="px-6 text-center text-sm text-amber-700 sm:text-left">Belum ada koleksi yang tersimpan. Tambahkan buku pertama Anda untuk mengisi rak.</p>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="rounded-3xl border border-amber-200 bg-white shadow-sm">
+                <div class="border-b border-amber-200 px-6 py-6 text-center sm:text-left">
+                    <h2 class="text-2xl font-semibold text-amber-900">Kategori</h2>
+                    <p class="mt-2 text-sm text-amber-700">Atur rak berdasarkan genre, penulis, atau ruang membaca untuk pencarian yang lebih cepat.</p>
+                </div>
+                <div class="grid grid-cols-1 gap-6 px-6 py-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {% for category in categories %}
+                        <article class="h-full">
+                            <a href="#" class="flex h-full flex-col rounded-2xl border border-amber-100 bg-amber-50 p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-lg sm:text-left">
+                                <h3 class="text-xl font-semibold text-amber-900">{{ category.name }}</h3>
+                                <p class="mt-3 text-sm text-amber-700">{{ category.items.count }} koleksi</p>
+                                <span class="mt-4 inline-flex items-center justify-center text-sm font-semibold text-amber-600 transition hover:text-amber-800 sm:justify-start">Jelajahi rak</span>
+                            </a>
+                        </article>
+                    {% empty %}
+                        <p class="px-6 text-center text-sm text-amber-700 sm:text-left">Belum ada kategori terbentuk. Buat kategori baru untuk mengelompokkan koleksi Anda.</p>
+                    {% endfor %}
+                </div>
+            </section>
         </div>
     </div>
 {% endblock %}

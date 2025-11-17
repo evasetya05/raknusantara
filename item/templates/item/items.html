@@ -1,20 +1,20 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-    Items
+    Item
 {% endblock %}
 
 {% block content %}
 <div class="pb-6 grid grid-cols-4 gap-4 bg-gray-100" xmlns="http://www.w3.org/1999/html">
         <div class="col-span-1">
             <form method="get" action="{% url 'item:browse_items' %}">
-                <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}" placeholder="Find item">
+                <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}" placeholder="Cari item">
 
-                <button class="mt-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl">Search</button>
+                <button class="mt-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl">Cari</button>
             </form>
 
             <hr class="my-6">
-            <p class="font-semibold">Categories</p>
+            <p class="font-semibold">Kategori</p>
             <ul>
                 {% for category in categories %}
                     <li class="px-2 py-2 rounded-xl {% if category.id == category_id %}bg-gray-200{% endif %}">
@@ -24,9 +24,9 @@
             </ul>
 
             <hr class="my-6">
-            <p class="font-semibold">Clear filters</p>
+            <p class="font-semibold">Hapus filter</p>
             <ul>
-                <li><a href="{% url 'item:browse_items' %}" class="mt-2 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white">Clear</a></li>
+                <li><a href="{% url 'item:browse_items' %}" class="mt-2 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white">Bersihkan</a></li>
             </ul>
         </div>
 
@@ -41,7 +41,7 @@
                         <div class="p-6 bg-white rounded-b-xl">
                             <h2 class="text-2xl">{{ item.name }}</h2>
                             <!--
-                            <p class="text-gray-500">Price: {{ item.price }}</p>
+                            <p class="text-gray-500">Harga: {{ item.price }}</p>
                             -->
                         </div>
                     </a>
