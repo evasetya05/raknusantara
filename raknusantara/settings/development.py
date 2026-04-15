@@ -16,7 +16,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'raknusantara',     # ganti dengan nama DB Anda
         'USER': 'eva',         # ganti user MySQL
-        'PASSWORD': 'abc', # ganti password MySQL
+        'PASSWORD': 'toor', # ganti password MySQL
         'HOST': 'localhost',         # atau IP server
         'PORT': '3306',              # default MySQL port
         'OPTIONS': {

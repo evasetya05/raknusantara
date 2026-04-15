@@ -8,7 +8,7 @@ INPUT_CLASSES = 'w-full py-4 px-6 rounded-xl border'
 class NewItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ('category', 'name', 'description', 'price', 'image', 'image_secondary', 'image_tertiary',)
+        fields = ('category', 'name', 'description', 'image', 'image_secondary', 'image_tertiary',)
         widgets = {
             'category': forms.Select(attrs={
                 'class': INPUT_CLASSES
@@ -76,7 +76,7 @@ class DiscussionScheduleForm(forms.ModelForm):
 class EditItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ('category', 'name', 'description', 'price', 'image', 'image_secondary', 'image_tertiary', 'is_sold',)
+        fields = ('category', 'name', 'description', 'image', 'image_secondary', 'image_tertiary', 'is_sold',)
         widgets = {
             'category': forms.Select(attrs={
                 'class': INPUT_CLASSES

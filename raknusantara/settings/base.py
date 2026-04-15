@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'item',
     'dashboard',
     'conversation',
+    'perpustakaan',
 ]
 
 MIDDLEWARE = [

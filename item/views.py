@@ -82,7 +82,7 @@ def new_item(request):
 
     return render(request=request, template_name='item/form.html', context={
         'form': form,
-        'title': 'New item'
+        'title': 'Buku Baru'
     })
 
 

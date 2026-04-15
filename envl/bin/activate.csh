@@ -1,5 +1,6 @@
 # This file must be used with "source bin/activate.csh" *from csh*.
 # You cannot run it directly.
+
 # Created by Davide Di Blasi <davidedb@gmail.com>.
 # Ported to Python 3.3 venv by Andrew Svetlov <andrew.svetlov@gmail.com>
 
@@ -8,7 +9,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV /media/eva/data/berbagi_10_kerja/app/python/django/3.rak_nusantara/envl
+setenv VIRTUAL_ENV /home/eva/app/python/3.raknusantara/envl
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/"bin":$PATH"

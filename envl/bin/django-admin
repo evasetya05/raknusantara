@@ -1,4 +1,4 @@
-#!/media/eva/data/berbagi_10_kerja/app/python/django/3.rak_nusantara/envl/bin/python3.11
+#!/home/eva/app/python/3.raknusantara/envl/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
