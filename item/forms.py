@@ -8,7 +8,7 @@ INPUT_CLASSES = 'w-full py-4 px-6 rounded-xl border'
 class NewItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ('category', 'name', 'description', 'image', 'image_secondary', 'image_tertiary',)
+        fields = ('category', 'name', 'description', 'perpustakaan', 'image', 'image_secondary', 'image_tertiary',)
         widgets = {
             'category': forms.Select(attrs={
                 'class': INPUT_CLASSES
@@ -17,6 +17,9 @@ class NewItemForm(forms.ModelForm):
                 'class': INPUT_CLASSES
             }),
             'description': forms.Textarea(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'perpustakaan': forms.Select(attrs={
                 'class': INPUT_CLASSES
             }),
             'image': forms.FileInput(attrs={
@@ -29,6 +32,13 @@ class NewItemForm(forms.ModelForm):
                 'class': INPUT_CLASSES
             })
         }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super(NewItemForm, self).__init__(*args, **kwargs)
+        if user:
+            from perpustakaan.models import Perpustakaan
+            self.fields['perpustakaan'].queryset = Perpustakaan.objects.filter(user=user)
 
 
 class CommentForm(forms.ModelForm):
@@ -76,7 +86,7 @@ class DiscussionScheduleForm(forms.ModelForm):
 class EditItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ('category', 'name', 'description', 'image', 'image_secondary', 'image_tertiary', 'is_sold',)
+        fields = ('category', 'name', 'description', 'perpustakaan', 'image', 'image_secondary', 'image_tertiary', 'is_sold',)
         widgets = {
             'category': forms.Select(attrs={
                 'class': INPUT_CLASSES
@@ -85,6 +95,9 @@ class EditItemForm(forms.ModelForm):
                 'class': INPUT_CLASSES
             }),
             'description': forms.Textarea(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'perpustakaan': forms.Select(attrs={
                 'class': INPUT_CLASSES
             }),
             'image': forms.FileInput(attrs={
@@ -97,3 +110,10 @@ class EditItemForm(forms.ModelForm):
                 'class': INPUT_CLASSES
             })
         }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super(EditItemForm, self).__init__(*args, **kwargs)
+        if user:
+            from perpustakaan.models import Perpustakaan
+            self.fields['perpustakaan'].queryset = Perpustakaan.objects.filter(user=user)

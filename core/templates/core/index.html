@@ -29,6 +29,62 @@
             {% endfor %}
         </div>
     </div>
+    
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-12 text-2xl text-center">Perpustakaan</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {% for perpustakaan in perpustakaans %}
+                <div>
+                    <a href="{% url 'perpustakaan:public_detail' perpustakaan.id %}">
+                        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="text-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16" class="mx-auto text-amber-600">
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1H3a1 1 0 0 0-1 1z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-amber-900 mb-2">{{ perpustakaan.name }}</h3>
+                            <p class="text-sm text-gray-600 mb-3">{{ perpustakaan.items.count }} buku</p>
+                            <div class="flex flex-wrap gap-2">
+                                {% if perpustakaan.email %}
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16" class="inline mr-1">
+                                        <path d="M.058 7.008l9.928-9.928a.5.5 0 0 1-.707-.707L8.708 2.293a.5.5 0 1 0-.707 0L.058 7.008z"/>
+                                        <path d="M3.4 3.4a.5.5 0 0 1 0-.708L2 2.293V14.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V2.293a.5.5 0 0 0-.708-.708L3.4 3.4z"/>
+                                    </svg>
+                                    Email
+                                </span>
+                                {% endif %}
+                                {% if perpustakaan.alamat %}
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16" class="inline mr-1">
+                                        <path d="M8 16s2-1.5 2-1.5c0-1.654-1.346-3-3-3S5.346 1.5 4 1.5 0 2.284 1.812 3 3.482s1.716 1.482 3 3.482c0 1.654-1.346 3-3 3zm0-11C4.686 0 1.346.734 1.346 1.648 0 1.654-.734 3-1.648 0-2.284-1.812-3-3.482S3.346 2.284 0 1.648c0 1.654.734 3 1.648 0 2.284.812 3 3.482z"/>
+                                    </svg>
+                                    Alamat
+                                </span>
+                                {% endif %}
+                                {% if perpustakaan.layanan %}
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16" class="inline mr-1">
+                                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1H3a1 1 0 0 0-1 1z"/>
+                                    </svg>
+                                    {{ perpustakaan.layanan|length }} Layanan
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% empty %}
+            <div class="col-span-full text-center py-12">
+                <p class="text-gray-500">Belum ada perpustakaan yang terdaftar.</p>
+                <a href="{% url 'perpustakaan:list' %}" class="inline-block mt-4 px-6 py-3 bg-amber-500 text-white rounded-xl hover:bg-amber-600">
+                    Buat Perpustakaan Pertama
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
     <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
         <h2 class="mb-12 text-2xl text-center">Categories</h2>
         <div class="grid grid-cols-3 gap-3">

@@ -43,6 +43,17 @@ def detail(request, pk):
     comment_form = CommentForm()
     upcoming_discussions = item.discussion_schedules.filter(scheduled_at__gte=timezone.now()).select_related('created_by').order_by('scheduled_at')
 
+    item_url = request.build_absolute_uri(reverse('item:detail', args=[item.pk]))
+    share_text = f"Lihat buku '{item.name}' di Rak Nusantara: {item_url}"
+    item_whatsapp_link = f"https://wa.me/?text={quote(share_text)}"
+    
+    # Facebook share
+    item_facebook_link = f"https://www.facebook.com/sharer/sharer.php?u={quote(item_url)}"
+    
+    # Twitter share
+    twitter_text = f"Lihat buku '{item.name}' koleksi menarik di Rak Nusantara"
+    item_twitter_link = f"https://twitter.com/intent/tweet?text={quote(twitter_text)}&url={quote(item_url)}"
+
     for schedule in upcoming_discussions:
         detail_url = reverse('item:discussion_schedule_detail', args=[schedule.pk])
         absolute_detail_url = request.build_absolute_uri(detail_url)
@@ -62,13 +73,16 @@ def detail(request, pk):
         'comments': comments,
         'comment_form': comment_form,
         'upcoming_discussions': upcoming_discussions,
+        'item_whatsapp_link': item_whatsapp_link,
+        'item_facebook_link': item_facebook_link,
+        'item_twitter_link': item_twitter_link,
     })
 
 
 @login_required
 def new_item(request):
     if request.method == 'POST':
-        form = NewItemForm(request.POST, request.FILES)
+        form = NewItemForm(request.POST, request.FILES, user=request.user)
 
         if form.is_valid():
             item = form.save(commit=False)
@@ -78,7 +92,7 @@ def new_item(request):
             return redirect('item:detail', pk=item.id)
 
     else:
-        form = NewItemForm()
+        form = NewItemForm(user=request.user)
 
     return render(request=request, template_name='item/form.html', context={
         'form': form,
@@ -91,7 +105,7 @@ def edit_item(request, pk):
     item = get_object_or_404(Item, pk=pk, created_by=request.user)
 
     if request.method == 'POST':
-        form = EditItemForm(request.POST, request.FILES, instance=item)
+        form = EditItemForm(request.POST, request.FILES, instance=item, user=request.user)
 
         if form.is_valid():
             form.save()
@@ -99,7 +113,7 @@ def edit_item(request, pk):
             return redirect('item:detail', pk=item.id)
 
     else:
-        form = EditItemForm(instance=item)
+        form = EditItemForm(instance=item, user=request.user)
 
     return render(request=request, template_name='item/form.html', context={
         'form': form,

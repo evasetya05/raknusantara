@@ -1,0 +1,143 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Edit Perpustakaan
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-2xl space-y-8">
+    <div class="rounded-3xl bg-white p-6 shadow-sm">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-3xl font-bold text-amber-900">Edit Perpustakaan</h1>
+            <a href="{% url 'perpustakaan:list' %}" 
+               class="rounded-xl bg-gray-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-600">
+                Kembali
+            </a>
+        </div>
+        
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+            
+            <div>
+                <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                    Nama Perpustakaan
+                </label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.name.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <div>
+                <label for="{{ form.alamat.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                    Alamat
+                </label>
+                {{ form.alamat }}
+                {% if form.alamat.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.alamat.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <div>
+                <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                    Email
+                </label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.email.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Media Sosial
+                </label>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2">
+                        <label class="text-sm text-gray-600 w-20">Instagram:</label>
+                        <input type="url" name="social_media_instagram" placeholder="https://instagram.com/username" 
+                               class="flex-1 rounded-xl border px-4 py-2 text-sm"
+                               value="{{ form.social_media.value.instagram|default:'' }}">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label class="text-sm text-gray-600 w-20">Facebook:</label>
+                        <input type="url" name="social_media_facebook" placeholder="https://facebook.com/username" 
+                               class="flex-1 rounded-xl border px-4 py-2 text-sm"
+                               value="{{ form.social_media.value.facebook|default:'' }}">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label class="text-sm text-gray-600 w-20">Twitter:</label>
+                        <input type="url" name="social_media_twitter" placeholder="https://twitter.com/username" 
+                               class="flex-1 rounded-xl border px-4 py-2 text-sm"
+                               value="{{ form.social_media.value.twitter|default:'' }}">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label class="text-sm text-gray-600 w-20">YouTube:</label>
+                        <input type="url" name="social_media_youtube" placeholder="https://youtube.com/channel" 
+                               class="flex-1 rounded-xl border px-4 py-2 text-sm"
+                               value="{{ form.social_media.value.youtube|default:'' }}">
+                    </div>
+                </div>
+                <p class="mt-2 text-xs text-gray-500">Masukkan URL lengkap media sosial (opsional)</p>
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Layanan yang Tersedia
+                </label>
+                <div class="space-y-2">
+                    {{ form.layanan }}
+                </div>
+                {% if form.layanan.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ form.layanan.errors.0 }}</p>
+                {% endif %}
+                <p class="mt-2 text-xs text-gray-500">Pilih semua layanan yang tersedia di perpustakaan Anda</p>
+            </div>
+            
+            <div class="flex gap-4">
+                <button type="submit" 
+                        class="flex-1 rounded-xl bg-teal-500 px-6 py-3 text-base font-semibold text-white transition hover:bg-teal-600">
+                    Simpan Perubahan
+                </button>
+                <a href="{% url 'perpustakaan:list' %}" 
+                   class="flex-1 rounded-xl border border-gray-300 bg-white px-6 py-3 text-base font-semibold text-gray-700 transition hover:bg-gray-50 text-center">
+                    Batal
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+/* Custom styling for checkboxes */
+.layanan input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #059669;
+    border-radius: 0.25rem;
+}
+
+.layanan label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.layanan label:hover {
+    background-color: #fef3c7;
+}
+
+.layanan ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.layanan li {
+    margin-bottom: 0.5rem;
+}
+</style>
+{% endblock %}

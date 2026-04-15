@@ -1,0 +1,82 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Daftar Perpustakaan
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-6xl space-y-8">
+    <div class="rounded-3xl bg-white p-6 shadow-sm">
+        <h1 class="mb-8 text-3xl font-bold text-amber-900 text-center">Daftar Perpustakaan</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for perpustakaan in perpustakaans %}
+                <div>
+                    <a href="{% url 'perpustakaan:public_detail' perpustakaan.id %}">
+                        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+                            <div class="text-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16" class="mx-auto text-amber-600">
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1H3a1 1 0 0 0-1 1z"/>
+                                </svg>
+                            </div>
+                            
+                            <h3 class="text-lg font-semibold text-amber-900 mb-2">{{ perpustakaan.name }}</h3>
+                            
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm text-gray-600">
+                                    <span>{{ perpustakaan.items.count }} buku</span>
+                                    {% if perpustakaan.items.exists %}
+                                        <span class="text-green-600">{{ perpustakaan.items.count }} tersedia</span>
+                                    {% endif %}
+                                </div>
+                                
+                                {% if perpustakaan.alamat %}
+                                <div class="text-sm text-gray-600">
+                                    <span class="font-medium">Alamat:</span> {{ perpustakaan.alamat|truncatechars:50 }}
+                                </div>
+                                {% endif %}
+                                
+                                {% if perpustakaan.email %}
+                                <div class="text-sm text-gray-600">
+                                    <span class="font-medium">Email:</span> {{ perpustakaan.email }}
+                                </div>
+                                {% endif %}
+                                
+                                {% if perpustakaan.layanan %}
+                                <div class="flex flex-wrap gap-1">
+                                    {% for layanan in perpustakaan.get_layanan_display %}
+                                    <span class="px-2 py-1 bg-amber-100 text-amber-800 text-xs rounded-full">
+                                        {{ layanan|truncatechars:15 }}
+                                    </span>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% empty %}
+            <div class="col-span-full text-center py-12">
+                <div class="text-gray-500 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 16 16" class="mx-auto">
+                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1H3a1 1 0 0 0-1 1z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-700 mb-4">Belum ada perpustakaan</h3>
+                <p class="text-gray-600 mb-6">Mari menjadi yang pertama! Bergabunglah dengan komunitas pecinta buku di Rak Nusantara.</p>
+                <div class="space-y-3">
+                    <a href="{% url 'core:signup' %}" 
+                       class="block w-full rounded-xl bg-teal-500 px-6 py-3 text-center text-base font-semibold text-white transition hover:bg-teal-600">
+                        Daftar Akun Baru
+                    </a>
+                    <a href="{% url 'core:login' %}" 
+                       class="block w-full rounded-xl border border-gray-300 bg-white px-6 py-3 text-center text-base font-semibold text-gray-700 transition hover:bg-gray-50">
+                        Masuk ke Akun
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

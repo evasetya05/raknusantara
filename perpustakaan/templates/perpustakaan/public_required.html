@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Perpustakaan Diperlukan Login
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-2xl space-y-8">
+    <div class="rounded-3xl bg-white p-6 shadow-sm">
+        <div class="text-center">
+            <div class="mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 16 16" class="mx-auto text-amber-600">
+                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1H3a1 1 0 0 0-1 1z"/>
+                </svg>
+            </div>
+            
+            <h1 class="mb-4 text-2xl font-bold text-amber-900">Login Diperlukan</h1>
+            
+            <p class="mb-6 text-gray-600">{{ message }}</p>
+            
+            <div class="space-y-3">
+                <a href="{% url 'core:login' %}" 
+                   class="inline-flex w-full items-center justify-center rounded-xl bg-teal-500 px-6 py-3 text-base font-semibold text-white transition hover:bg-teal-600">
+                    Masuk ke Akun
+                </a>
+                
+                <a href="{% url 'core:signup' %}" 
+                   class="inline-flex w-full items-center justify-center rounded-xl border border-gray-300 bg-white px-6 py-3 text-base font-semibold text-gray-700 transition hover:bg-gray-50">
+                    Daftar Akun Baru
+                </a>
+            </div>
+            
+            <p class="mt-6 text-sm text-gray-500">
+                Belum punya akun? Daftar sekarang untuk membuat perpustakaan dan berbagi koleksi buku Anda.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
