@@ -1,8 +1,29 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = 'django-insecure-a@)zh2e8-)^i_bk9(x3m_qj%iq0#9d&-k=(g_)nq9k74+qv5xf'
+
+
+DEBUG = True
+ALLOWED_HOSTS = ['raknusantara.teknusa.com', 'www.raknusantara.teknusa.com', 'localhost', '127.0.0.1']
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'raknusantara_db'),
+        'USER': os.environ.get('DB_USER', 'raknusantara_user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '@Pontianak123'),
+        'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
+    }
+}
+
+# Pengaturan static file untuk production
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
