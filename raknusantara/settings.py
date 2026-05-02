@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-a@)zh2e8-)^i_bk9(x3m_qj%iq0#9d&-k=(g_)nq9k74+qv5xf
 
 
 DEBUG = True
-ALLOWED_HOSTS = ['raknusantara.teknusa.com', 'www.raknusantara.teknusa.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['raknusantara.teknusa.com', 'www.raknusantara.teknusa.com', 'localhost', '127.0.0.1', '192.168.18.111']
 
 
 DATABASES = {
