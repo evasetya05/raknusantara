@@ -10,13 +10,20 @@ DEBUG = True
 ALLOWED_HOSTS = ['raknusantara.teknusa.com', 'www.raknusantara.teknusa.com', 'localhost', '127.0.0.1', '192.168.18.111']
 
 
+db_host = os.environ.get('DB_HOST', '127.0.0.1')
+
+# Docker Compose service names (e.g. "db") only resolve inside Docker networks.
+# If app runs on host machine and DB_HOST is "db", fallback to localhost.
+if db_host == 'db' and not os.path.exists('/.dockerenv'):
+    db_host = '127.0.0.1'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', 'raknusantara_db'),
         'USER': os.environ.get('DB_USER', 'raknusantara_user'),
         'PASSWORD': os.environ.get('DB_PASSWORD', '@Pontianak123'),
-        'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
+        'HOST': db_host,
         'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
