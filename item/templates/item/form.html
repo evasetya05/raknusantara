@@ -5,26 +5,85 @@
 {% endblock %}
 
 {% block content %}
-<div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
-    <h1 class="mb-6 text-3xl">{{ title }}</h1>
+<style>
+    .item-form p {
+        margin: 0;
+    }
 
-    <form method="post" action="." enctype="multipart/form-data">
+    .item-form p + p {
+        margin-top: 0.95rem;
+    }
+
+    .item-form label {
+        display: inline-block;
+        margin-bottom: 0.45rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: rgb(120 53 15);
+    }
+
+    .item-form input,
+    .item-form select,
+    .item-form textarea {
+        width: 100%;
+        border-radius: 0.75rem;
+        border: 1px solid rgb(217 119 6 / 0.25);
+        background-color: white;
+        padding: 0.72rem 0.82rem;
+        font-size: 0.95rem;
+        line-height: 1.35rem;
+        color: rgb(68 64 60);
+        outline: none;
+        transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .item-form textarea {
+        min-height: 8rem;
+        resize: vertical;
+    }
+
+    .item-form input:focus,
+    .item-form select:focus,
+    .item-form textarea:focus {
+        border-color: rgb(13 148 136);
+        box-shadow: 0 0 0 3px rgb(20 184 166 / 0.2);
+    }
+
+    .item-form ul.errorlist {
+        margin: 0.35rem 0 0;
+        padding-left: 1rem;
+        color: rgb(185 28 28);
+        font-size: 0.82rem;
+    }
+</style>
+
+<section class="mx-auto my-4 w-full max-w-3xl sm:my-8">
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-amber-900 sm:text-3xl">{{ title }}</h1>
+        <p class="mt-1 text-sm text-amber-700">Lengkapi detail buku. Tampilan sudah dioptimalkan untuk layar HP.</p>
+    </div>
+
+    <form method="post" action="." enctype="multipart/form-data" class="item-form space-y-5">
         {% csrf_token %}
-        <div class="space-y-4">
-            {{ form.as_p }}
-        </div>
 
         {% if form.errors or form.non_field_errors %}
-            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+            <div class="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
                 {% for field in form %}
                     {{ field.errors }}
                 {% endfor %}
-
                 {{ form.non_field_errors }}
             </div>
         {% endif %}
 
-        <button class="mt-6 py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Tambah Item</button>
+        <div class="space-y-4">
+            {{ form.as_p }}
+        </div>
+
+        <div class="pt-2">
+            <button class="w-full rounded-xl bg-teal-600 px-5 py-3 text-base font-semibold text-white transition hover:bg-teal-700 sm:w-auto sm:px-8 sm:py-3.5 sm:text-lg">
+                Simpan Buku
+            </button>
+        </div>
     </form>
-</div>
+</section>
 {% endblock %}
