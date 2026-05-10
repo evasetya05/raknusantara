@@ -5,9 +5,20 @@
 {% endblock %}
 
 {% block content %}
+    <div class="mt-6 flex flex-col gap-4 sm:hidden">
+        <a href="{% url 'item:new_item' %}" 
+           class="rounded-xl bg-amber-600 px-6 py-4 text-center text-xl font-bold text-white shadow-lg transition hover:bg-amber-700">
+            Upload Buku
+        </a>
+        <a href="{% url 'item:browse_items' %}" 
+           class="rounded-xl bg-teal-600 px-6 py-4 text-center text-xl font-bold text-white shadow-lg transition hover:bg-teal-700">
+            Cari Buku
+        </a>
+    </div>
+
     <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
         <h2 class="mb-12 text-2xl text-center">Buku Baru</h2>
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {% for item in items %}
                 <div>
                     <a href="{% url 'item:detail' item.id %}">
@@ -87,7 +98,7 @@
     
     <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
         <h2 class="mb-12 text-2xl text-center">Categories</h2>
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {% for category in categories %}
                 <div>
                     <a href="#">
