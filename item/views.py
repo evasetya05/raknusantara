@@ -44,7 +44,10 @@ def detail(request, pk):
     upcoming_discussions = item.discussion_schedules.filter(scheduled_at__gte=timezone.now()).select_related('created_by').order_by('scheduled_at')
 
     item_url = request.build_absolute_uri(reverse('item:detail', args=[item.pk]))
-    share_text = f"Lihat buku '{item.name}' di Rak Nusantara: {item_url}"
+    item_image_url = request.build_absolute_uri(item.primary_image.url) if item.primary_image else ''
+    share_text = f"Lihat buku '{item.name}' di Rak Nusantara:\n{item_url}"
+    if item_image_url:
+        share_text += f"\nGambar buku: {item_image_url}"
     item_whatsapp_link = f"https://wa.me/?text={quote(share_text)}"
     
     # Facebook share
@@ -53,6 +56,10 @@ def detail(request, pk):
     # Twitter share
     twitter_text = f"Lihat buku '{item.name}' koleksi menarik di Rak Nusantara"
     item_twitter_link = f"https://twitter.com/intent/tweet?text={quote(twitter_text)}&url={quote(item_url)}"
+    item_instagram_caption = (
+        f"Lagi baca '{item.name}' di Rak Nusantara. "
+        f"Cek detailnya di {item_url}"
+    )
 
     for schedule in upcoming_discussions:
         detail_url = reverse('item:discussion_schedule_detail', args=[schedule.pk])
@@ -76,6 +83,9 @@ def detail(request, pk):
         'item_whatsapp_link': item_whatsapp_link,
         'item_facebook_link': item_facebook_link,
         'item_twitter_link': item_twitter_link,
+        'item_image_url': item_image_url,
+        'item_instagram_caption': item_instagram_caption,
+        'item_url': item_url,
     })
 
 
