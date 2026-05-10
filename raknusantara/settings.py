@@ -33,6 +33,7 @@ DATABASES = {
 }
 
 # Pengaturan static file untuk production
+STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 

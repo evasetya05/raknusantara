@@ -58,15 +58,15 @@
         </div>
     </div>
     
-    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <div class="mt-6 px-4 py-8 bg-gray-100 rounded-xl sm:px-6 sm:py-12">
         <h2 class="mb-12 text-2xl text-center">Categories</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="grid max-h-[45vh] grid-cols-2 gap-2 overflow-y-auto pr-1 sm:max-h-[52vh] sm:grid-cols-3 sm:gap-3">
             {% for category in categories %}
                 <div>
                     <a href="#">
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h2 class="textx-2xl">{{ category.name }}</h2>
-                            <p class="text-gray-500">{{ category.items.count }} items</p>
+                        <div class="rounded-xl bg-white p-3 sm:p-6">
+                            <h2 class="truncate text-sm font-semibold text-amber-900 sm:text-lg">{{ category.name }}</h2>
+                            <p class="mt-1 text-xs text-gray-500 sm:text-sm">{{ category.items.count }} items</p>
                         </div>
                     </a>
                 </div>
