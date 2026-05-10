@@ -8,6 +8,6 @@ from item.models import Item
 def index(request):
     items = Item.objects.filter(created_by=request.user)
 
-    return render(request=request, template_name='dashboard/index.html', context={
+    return render(request=request, template_name='dashboard/home.html', context={
         'items': items
     })
