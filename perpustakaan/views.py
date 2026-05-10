@@ -55,6 +55,8 @@ def perpustakaan_list(request):
         'whatsapp_link': whatsapp_link,
         'facebook_link': facebook_link,
         'twitter_link': twitter_link,
+        'total_books': perpustakaan.items.count(),
+        'available_books': perpustakaan.items.filter(is_sold=False).count(),
     })
 
 @login_required
